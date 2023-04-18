@@ -6,11 +6,16 @@ on:
 
 
 jobs:
-  run_if:
-    if: startsWith(github.event.pull_request.head_ref, 'hotfix/')
+  auto_approve:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-
+    if: startsWith(github.event.pull_request.head_ref, 'hotfix/')
+    steps:
+      - uses: hmarr/auto-approve-action@v3
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: hmarr/auto-approve-action@v3
